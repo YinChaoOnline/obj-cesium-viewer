@@ -1,6 +1,6 @@
 const bingKey = "AjhB5DSqKwt7hdMeYtkehPviZ8izcW9xNgKzI18tfqBzGgt8t6UUlyVP-l5VYuD2";
 Cesium.BingMapsApi.defaultKey = bingKey;
-const viewer = new Cesium.Viewer('cesiumContainer', {
+var viewer = new Cesium.Viewer('cesiumContainer', {
 
     animation: false, // related to the animation
     timeline: false,
@@ -65,10 +65,10 @@ viewer.canvas.addEventListener('click', function (e) {
         const promise = Cesium.sampleTerrainMostDetailed(terrainProvider, [Cesium.Cartographic.fromDegrees(parseFloat(longitude), parseFloat(latitude))]);
         promise.then(function (positions) {
             //console.log(positions[0].height);
-            $('#inputAltitude').val(positions[0].height.toFixed(2))
+            $('#inputHeight').val(positions[0].height.toFixed(2))
         }).otherwise(function (error) {
             console.log(error);
-            $('#inputAltitude').val(0)
+            $('#inputHeight').val(0)
         });
     } else {
         alert('Globe was not picked');
@@ -150,3 +150,82 @@ $('#btnUploadObj').click(() => {
         });
     }
 });
+
+function setModelDefaultParams(
+    longitude = 114.178483,
+    latitude = 22.302250,
+    height = 13,
+    heading = 0,
+    pitch = 0,
+    roll = 0,
+    scale = 1
+) {
+
+    //model location
+    $('#inputLongitude').val(longitude)
+    $('#inputLatitude').val(latitude)
+    $('#inputHeight').val(height)
+
+    //model rotation degrees
+    $('#inputHeading').val(heading)
+    $('#inputPitch').val(pitch)
+    $('#inputRoll').val(roll)
+
+    //model scale
+    $('#inputScale').val(height)
+}
+
+
+
+
+//show model with location, orientation, scale
+$("#btnShowModel").click(() => {
+
+    //FIXME: for avoiding the error of rendering model in the same location
+    if (viewer.entities) {
+        viewer.entities.removeAll();
+    }
+
+    //model location
+    let longitude = $('#inputLongitude').val() ? $('#inputLongitude').val() : 114.178483;
+    let latitude = $('#inputLatitude').val() ? $('#inputLatitude').val() : 22.302250;
+    let height = $('#inputHeight').val() ? $('#inputHeight').val() : 13;
+
+    //model rotation degrees
+    let heading = $('#inputHeading').val() ? $('#inputHeading').val() : 0;
+    let pitch = $('#inputPitch').val() ? $('#inputPitch').val() : 0;
+    let roll = $('#inputRoll').val() ? $('#inputRoll').val() : 0;
+
+    //model scale
+    let scale = $('#inputScale').val() ? $('#inputScale').val() : 1;
+    addModelByHeadingPitchRollMatrix(longitude, latitude, height, heading, pitch, roll, scale);
+})
+
+function addModelByHeadingPitchRollMatrix(lon, lat, height, heading = 0, pitch = 0, roll = 0, scale = 1) {
+
+    //https://stackoverflow.com/questions/30795745/how-to-move-3d-model-on-cesium
+    let center = Cesium.Cartesian3.fromDegrees(lon, lat, height);
+
+    //by controling heading,pitch and roll ,we can rotate the model around x,y,z axis
+    let hpv = new Cesium.HeadingPitchRoll(heading * Cesium.Math.PI / 180, pitch * Cesium.Math.PI / 180, roll * Cesium.Math.PI / 180);
+
+    let modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(
+        center,
+        hpv,
+        // Cesium.Ellipsoid.WGS84,
+        // Cesium.Transforms.eastNorthUpToFixedFrame,
+        // modelMatrix
+    );
+
+    let model = viewer.scene.primitives.add(Cesium.Model.fromGltf({
+        url: 'uploads/result.gltf',
+        show: true, // default
+        modelMatrix: modelMatrix,
+        scale: scale, // double size
+        // minimumPixelSize: 128, // never smaller than 128 pixels
+        // maximumScale: 20000, // never larger than 20000 * model size (overrides minimumPixelSize)
+        // allowPicking: true, // not pickable
+        // debugShowBoundingVolume: false, // default
+        // debugWireframe: false
+    }));
+}

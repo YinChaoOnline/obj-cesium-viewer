@@ -30,6 +30,10 @@ body,
     padding-left: 20px;
     margin-bottom: 10px;
 }
+.img-thumbnail{
+    width: 200px;
+    margin-bottom: 10px;
+}
 
 #inputFileObjModel{
     margin-top: 7px;
