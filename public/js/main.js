@@ -11,6 +11,13 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
     // terrainProvider: new EllipsoidTerrainProvider()
 });
 
+var terrainProvider = new Cesium.CesiumTerrainProvider({
+    url: 'https://assets.agi.com/stk-terrain/v1/tilesets/world/tiles',
+    // requestVertexNormals: true
+});
+//HACK: cuz terrain is very ugly, so we don't set the terrainprovider.
+//viewer.terrainProvider = terrainProvider;
+
 // set home button default view instead of flying to the world
 setHomeButtonView(Cesium);
 
@@ -39,6 +46,34 @@ viewer.camera.flyTo({
     }
 });
 
+viewer.canvas.addEventListener('click', function (e) {
+    const mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
+    const ellipsoid = viewer.scene.globe.ellipsoid;
+    const cartesian = viewer.camera.pickEllipsoid(mousePosition, ellipsoid);
+    if (cartesian) {
+        const cartographic = ellipsoid.cartesianToCartographic(cartesian);
+        const longitude = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
+        const latitude = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
+        const height = cartographic.height.toFixed(3);
+
+        //set mouse position of longitude,latitude
+        $('#inputLongitude').val(longitude)
+        $('#inputLatitude').val(latitude)
+
+        //HACK: set mouse altitude by promise
+        //get the altitude of mouse position by sampleTerrainMostDetailed
+        const promise = Cesium.sampleTerrainMostDetailed(terrainProvider, [Cesium.Cartographic.fromDegrees(parseFloat(longitude), parseFloat(latitude))]);
+        promise.then(function (positions) {
+            //console.log(positions[0].height);
+            $('#inputAltitude').val(positions[0].height.toFixed(2))
+        }).otherwise(function (error) {
+            console.log(error);
+            $('#inputAltitude').val(0)
+        });
+    } else {
+        alert('Globe was not picked');
+    }
+}, false);
 
 
 //toolbox
