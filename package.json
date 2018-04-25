@@ -1,0 +1,39 @@
+{
+  "name": "obj-cesium-viewer",
+  "version": "1.0.0",
+  "description": "view obj models correctly in cesium",
+  "main": "server.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YinChaoOnline/obj-cesium-viewer.git"
+  },
+  "keywords": [
+    "cesium",
+    "nodejs",
+    "obj2gltf",
+    "model matrix",
+    "3D model transformation"
+  ],
+  "author": "YinChAO",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YinChaoOnline/obj-cesium-viewer/issues"
+  },
+  "homepage": "https://github.com/YinChaoOnline/obj-cesium-viewer#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "obj2gltf": "^2.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.1.1"
+  }
+}
