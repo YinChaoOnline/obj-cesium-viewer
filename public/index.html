@@ -47,7 +47,32 @@
                 </div>
             </div>
             <div id="show" class="tab-pane fade">
-                <form action=""></form>
+                <form class="form-yc form-horizontal">
+                    <h4 class="text-success">Click on globe to pick the model position.</h4>
+                    <div class="form-group">
+                        <label for="inputLocation" class="col-sm-2 control-label">Location:</label>
+                        <div class="col-sm-offset-1 col-sm-8">
+                            <input type="text" class="form-control" id="inputLongitude" placeholder="longitude eg: 112.23456">
+                            <input type="text" class="form-control" id="inputLatitude" placeholder="latitude eg: 23.234567">
+                            <input type="text" class="form-control" id="inputAltitude" placeholder="altitude eg: 15.2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputOrientation" class="col-sm-2 control-label">Orientation:</label>
+                        <div class="col-sm-offset-1 col-sm-8">
+                            <input type="text" class="form-control" id="inputHeading" placeholder="heading (degree)">
+                            <input type="text" class="form-control" id="inputPitch" placeholder="pitch (degree)">
+                            <input type="text" class="form-control" id="inputRoll" placeholder="roll (degree)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputScale" class="col-sm-2 control-label">Scale:</label>
+                        <div class="col-sm-offset-1 col-sm-6">
+                            <input type="text" class="form-control" id="inputScale" placeholder="model scale eg: 1.0" value="1.0">
+                        </div>
+                    </div>
+                    <input class="btn btn-default center-block" type="button" value="Show Model" onclick="showModel()">
+                </form>
             </div>
         </div>
     </div>
