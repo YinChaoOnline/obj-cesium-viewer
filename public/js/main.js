@@ -29,6 +29,17 @@ function setHomeButtonView(Cesium) {
     Cesium.Camera.DEFAULT_VIEW_RECTANGLE = rectangle;
 }
 
+//fly to hk polyU
+viewer.camera.flyTo({
+    destination: Cesium.Cartesian3.fromDegrees(114.17989587474729, 22.304069958432294, 1216.7704213780498),
+    orientation: {
+        heading: Cesium.Math.toRadians(360),
+        pitch: Cesium.Math.toRadians(-89.9999979086902),
+        roll: 0.0
+    }
+});
+
+
 
 //toolbox
 $('#btnRemoveAll').click(() => {
