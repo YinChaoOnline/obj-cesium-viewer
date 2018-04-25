@@ -8,3 +8,10 @@ body,
     padding: 0;
     overflow: hidden;
 }
+
+.toolbox{
+    position: fixed;
+    z-index: 999;
+    left: 10px;
+    bottom: 40px;
+}

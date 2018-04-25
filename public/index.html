@@ -14,7 +14,25 @@
 
 <body>
     <div id="cesiumContainer"></div>
-
+    <!-- Single button -->
+    <div class="toolbox btn-group dropup">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Toolbox
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <a id='btnRemoveAll' href="#">Remove All Entities</a>
+            </li>
+            <li>
+                <a id='btnShowCamera' href="#">Show Camera Params</a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+                <a href="#">todo</a>
+            </li>
+        </ul>
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

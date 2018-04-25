@@ -28,3 +28,36 @@ function setHomeButtonView(Cesium) {
     Cesium.Camera.DEFAULT_VIEW_FACTOR = 0;
     Cesium.Camera.DEFAULT_VIEW_RECTANGLE = rectangle;
 }
+
+
+//toolbox
+$('#btnRemoveAll').click(() => {
+    viewer.entities.removeAll();
+})
+
+$('#btnShowCamera').click(() => {
+    const cameraPosition = getCurrentCameraPostion();
+    const strPostion = "viewer.camera.flyTo({\n\tdestination : Cesium.Cartesian3.fromDegrees(" + cameraPosition.longitude + "," + cameraPosition.latitude + "," + cameraPosition.height + "),\n\t" +
+        "orientation : {\n\t\theading : Cesium.Math.toRadians(" + cameraPosition.heading + "),\n\t\tpitch : Cesium.Math.toRadians(" + cameraPosition.pitch + "),\n\t\troll:0.0\n}});";
+    console.log(strPostion);
+    alert(strPostion);
+})
+
+function getCurrentCameraPostion() {
+    const cesiumCamera = viewer.scene.camera;
+    const position = Cesium.Ellipsoid.WGS84.cartesianToCartographic(cesiumCamera.position);
+    const latitude = Cesium.Math.toDegrees(position.latitude);
+    const longitude = Cesium.Math.toDegrees(position.longitude);
+    const height = position.height;
+    const heading = Cesium.Math.toDegrees(cesiumCamera.heading);
+    const pitch = Cesium.Math.toDegrees(cesiumCamera.pitch);
+    const roll = Cesium.Math.toDegrees(cesiumCamera.roll);
+    return {
+        latitude: latitude,
+        longitude: longitude,
+        height: height,
+        heading: heading,
+        pitch: pitch,
+        roll: roll
+    }
+}
