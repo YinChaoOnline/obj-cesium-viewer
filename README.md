@@ -9,3 +9,7 @@ view obj model correctly in cesium
   * scale
   * rotate model around X,Y,Z axis by adjusting models' heading(yaw), pitch, roll
   ![](doc/img/Pitch-roll-and-yaw-of-the-tag.png)
+
+  # project snapshots
+  ![](doc/img/main1.jpg)
+  ![](doc/img/main2.jpg)
