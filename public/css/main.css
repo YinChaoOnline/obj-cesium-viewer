@@ -9,9 +9,27 @@ body,
     overflow: hidden;
 }
 
+.panel-main {
+    position: fixed;
+    z-index: 999;
+    left: 10px;
+    top: 20px;
+    color: #333;
+    background-color: #fff;
+}
+
 .toolbox{
     position: fixed;
     z-index: 999;
     left: 10px;
     bottom: 40px;
+    width: 200px;
+}
+
+.form-yc{
+    padding-left: 20px;
+}
+
+#inputFileObjModel{
+    margin-top: 7px;
 }
