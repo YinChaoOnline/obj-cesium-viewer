@@ -70,7 +70,7 @@ app.post('/upload', function (req, res) {
     form.multiples = false;
 
     // store all uploads in the /uploads directory
-    form.uploadDir = path.join(__dirname, '/uploads');
+    form.uploadDir = path.join(__dirname, 'public/uploads');
 
     // every time a file has been uploaded successfully,
     // rename it to it's orignal name
@@ -119,7 +119,7 @@ app.post('/upload', function (req, res) {
 });
 
 app.get('/gltf',(req,res)=>{
-    res.download(path.join('uploads', 'result.gltf'));
+    res.download(path.join('public/uploads', 'result.gltf'));
 })
 
 // listen and close methods are need for mocha testing.
