@@ -61,3 +61,46 @@ function getCurrentCameraPostion() {
         roll: roll
     }
 }
+
+
+//upload obj model
+$('#btnUploadObj').click(() => {
+
+    const files = $('#inputFileObjModel').get(0).files;
+
+    if (files.length > 0) {
+        // create a FormData object which will be sent as the data payload in the
+        // AJAX request
+        const formData = new FormData();
+
+        // loop through all the selected files and add them to the formData object
+        let file = null;
+        for (let i = 0; i < files.length; i++) {
+            file = files[i];
+            // add the files to formData object for the data payload
+            formData.append('OBJ', file, file.name);
+        }
+
+        $.ajax({
+            url: '/upload',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log('upload successful!\n' + data);
+            },
+            xhr: function () {
+                // create an XMLHttpRequest
+                var xhr = new XMLHttpRequest();
+                return xhr;
+            }
+        }).done(function (msg) {
+            console.log('Nice! finish uploading obj and converting obj file.')
+            $("#divDownloadGltf").removeClass('hidden');
+        }).fail(function (jqXHR, textStatus) {
+            $("#divDownloadGltf").addClass('hidden');
+            alert("Upload Obj failed: " + textStatus);
+        });
+    }
+});

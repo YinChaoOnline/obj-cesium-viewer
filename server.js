@@ -5,6 +5,7 @@ const express = require('express');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const formidable = require('formidable');
 const obj2gltf = require('obj2gltf');
 
 const app = express();
@@ -25,7 +26,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('', function (req, res) {
-    res.sendFile(path.join(__dirname,'public/index.html'));
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 })
 
 // Get port from environment and store in Express.
@@ -33,8 +34,8 @@ const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 //start server
-const server=app.listen(port, function () {
-    console.log("app is running on port: "+ port);
+const server = app.listen(port, function () {
+    console.log("app is running on port: " + port);
 });
 
 /**
@@ -55,6 +56,71 @@ function normalizePort(val) {
 
     return false;
 }
+
+//handle http requests
+app.post('/upload', function (req, res) {
+
+    console.log('start post upload.')
+
+    // create an incoming form object
+    let form = new formidable.IncomingForm();
+    let fileName = '';
+
+    // specify that we want to allow the user to upload multiple files in a single request
+    form.multiples = false;
+
+    // store all uploads in the /uploads directory
+    form.uploadDir = path.join(__dirname, '/uploads');
+
+    // every time a file has been uploaded successfully,
+    // rename it to it's orignal name
+    // IF EXISTED, DELETE the file;
+    form.on('file', function (field, file) {
+        if (fs.existsSync(path.join(form.uploadDir, file.name))) {
+            fs.unlinkSync(path.join(form.uploadDir, file.name));
+        }
+        fs.rename(file.path, path.join(form.uploadDir, file.name));
+        fileName = file.name;
+    });
+
+    // log any errors that occur
+    form.on('error', function (err) {
+        console.log('An error has occured: \n' + err);
+    });
+
+    // once all the files have been uploaded, send a response to the client
+    // then convert obj to gltf
+    form.on('end', function () {
+
+        //send a success
+        res.end('success');
+
+        console.log('start convert obj to gltf.')
+        //start converting obj to gltf
+        obj2gltf(path.join(form.uploadDir, fileName), {
+            materialsCommon: true,
+            secure: true,
+            checkTransparency: true
+        }).then(function (gltf) {
+            const data = Buffer.from(JSON.stringify(gltf));
+            fs.writeFileSync(path.join(form.uploadDir,'result.gltf'), data);
+            console.log("gltf generated done!")
+        }).catch(function (err) {
+            console.log('gltf generated failed for: ' + err);
+        });
+    });
+
+    // parse the incoming request containing the form data
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            console.log(err)
+        }
+    });
+});
+
+app.get('/gltf',(req,res)=>{
+    res.download(path.join('uploads', 'result.gltf'));
+})
 
 // listen and close methods are need for mocha testing.
 exports.listen = function (port) {

@@ -28,7 +28,7 @@
 
         <div class="tab-content">
             <div id="upload" class="tab-pane fade in active">
-                <form class="form-yc form-horizontal" method="POST" url="/upload">
+                <form class="form-yc form-horizontal">
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="inputFileObjModel">Choose Obj File: </label>
                         <div class="col-sm-6">
@@ -37,13 +37,15 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <button type="submit" class="btn btn-default">Upload Obj</button>
+                            <a id="btnUploadObj" class="btn btn-default">Upload Obj</a>
                         </div>
                     </div>
                 </form>
-                <div class="alert alert-sucess hidden">
-                    <p>Success!</p>
-                    <a class="btn btn-success" href="">DownLoad GLTF</a>
+                <div id='divDownloadGltf' class="alert alert-sucess hidden">
+                    <p class="text-success">Convert Obj to Gltf Successfully!
+                        <a class="btn btn-success" href="/gltf"> DownLoad GLTF</a>
+                    </p>
+                    <p class="text-primary">Please Go Step2.</p>
                 </div>
             </div>
             <div id="show" class="tab-pane fade">
