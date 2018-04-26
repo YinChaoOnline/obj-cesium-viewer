@@ -17,10 +17,12 @@ $ cd obj-cesium-viewer
 $ npm i
 ```
 
-3. start the server
+3.start the server
 ```
 $ node server
 ```
+
+4.play with the repo;upload a obj, and visulize the model in different locations and orientation and scales.
 
 # functions
 - upload [obj](https://en.wikipedia.org/wiki/Wavefront_.obj_file) model to the server
