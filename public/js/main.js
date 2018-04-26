@@ -15,11 +15,14 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
 viewer.extend(Cesium.viewerCesiumInspectorMixin);
 
 var terrainProvider = new Cesium.CesiumTerrainProvider({
-    url: 'https://assets.agi.com/stk-terrain/v1/tilesets/world/tiles',
+
+    //https://assets.agi.com/stk-terrain/v1/tilesets/world/tiles
+    //https://cesiumjs.org/data-and-assets/terrain/stk-world-terrain/
+    url: '//assets.agi.com/stk-terrain/world',
     // requestVertexNormals: true
 });
-//HACK: cuz terrain is very ugly, so we don't set the terrainprovider.
-//viewer.terrainProvider = terrainProvider;
+//HACK: cuz terrain is very ugly, so we may not set the terrainprovider.
+viewer.terrainProvider = terrainProvider;
 
 // set home button default view instead of flying to the world
 setHomeButtonView(Cesium);
