@@ -2,19 +2,25 @@
 view obj model correctly in cesium
 
 # Requirements
-node 8.0+
+node 8.0 plus
 git
 
 # Install
 1. install the repo:
+```
 $ git clone https://github.com/YinChaoOnline/obj-cesium-viewer
+```
 
 2. change to obj-cesium-viewer folder, install node packages
+```
 $ cd obj-cesium-viewer
 $ npm i
+```
 
 3. start the server
+```
 $ node server
+```
 
 # functions
 - upload [obj](https://en.wikipedia.org/wiki/Wavefront_.obj_file) model to the server
