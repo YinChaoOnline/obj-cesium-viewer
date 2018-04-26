@@ -13,3 +13,4 @@ view obj model correctly in cesium
   # project snapshots
   ![](doc/img/main1.jpg)
   ![](doc/img/main2.jpg)
+  ![](doc/img/main3.jpg)
