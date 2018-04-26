@@ -113,6 +113,17 @@ function getCurrentCameraPostion() {
 $('#btnUploadObj').click(() => {
 
     const files = $('#inputFileObjModel').get(0).files;
+    if (files.length == 0) {
+        alert('please choose a obj file!')
+        return;
+    }
+
+    // if not obj file, reset input:file button and alert
+    if (!files[0].name.endsWith('.obj')) {
+        $('#inputFileObjModel').replaceWith($('#inputFileObjModel').val('').clone(true));
+        alert('please upload an obj file!')
+        return;
+    }
 
     if (files.length > 0) {
         // create a FormData object which will be sent as the data payload in the
