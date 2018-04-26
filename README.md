@@ -6,12 +6,12 @@ node 8.0 plus
 git
 
 # Install
-1. install the repo:
+1.install the repo
 ```
 $ git clone https://github.com/YinChaoOnline/obj-cesium-viewer
 ```
 
-2. change to obj-cesium-viewer folder, install node packages
+2.change to obj-cesium-viewer folder, install node packages
 ```
 $ cd obj-cesium-viewer
 $ npm i
@@ -32,6 +32,14 @@ $ node server
   ![](doc/img/Pitch-roll-and-yaw-of-the-tag.png)
 
 # project snapshots
+1.project ui
+
 ![](doc/img/main1.jpg)
+
+2.tab1
+
 ![](doc/img/main2.jpg)
+
+3.tab2
+
 ![](doc/img/main3.jpg)
