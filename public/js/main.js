@@ -22,7 +22,7 @@ var terrainProvider = new Cesium.CesiumTerrainProvider({
     // requestVertexNormals: true
 });
 //HACK: cuz terrain is very ugly, so we may not set the terrainprovider.
-viewer.terrainProvider = terrainProvider;
+// viewer.terrainProvider = terrainProvider;
 
 // set home button default view instead of flying to the world
 setHomeButtonView(Cesium);
