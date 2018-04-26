@@ -11,6 +11,9 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
     // terrainProvider: new EllipsoidTerrainProvider()
 });
 
+//add cesium inspector widget
+viewer.extend(Cesium.viewerCesiumInspectorMixin);
+
 var terrainProvider = new Cesium.CesiumTerrainProvider({
     url: 'https://assets.agi.com/stk-terrain/v1/tilesets/world/tiles',
     // requestVertexNormals: true
