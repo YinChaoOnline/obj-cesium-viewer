@@ -200,7 +200,8 @@ $("#btnShowModel").click(() => {
 
     //FIXME: for avoiding the error of rendering model in the same location
     if (viewer.entities) {
-        viewer.entities.removeAll();
+        //viewer.entities.removeAll();
+        //viewer.scene.primitives.removeAll();
     }
 
     //model location
