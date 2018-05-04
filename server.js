@@ -29,33 +29,15 @@ app.get('', function (req, res) {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 })
 
+const port = process.env.PORT || 3000;
 // Get port from environment and store in Express.
-const port = normalizePort(process.env.PORT || '3000');
+// on CLI(USE Git Bash), set the port with "PORT=8080 node server"
 app.set('port', port);
 
 //start server
 const server = app.listen(port, function () {
     console.log("app is running on port: " + port);
 });
-
-/**
- * Normalize a port into a number, string, or false.
- */
-function normalizePort(val) {
-    const port = parseInt(val, 10);
-
-    if (isNaN(port)) {
-        // Named pipe
-        return val;
-    }
-
-    if (port >= 0) {
-        // Port number
-        return port;
-    }
-
-    return false;
-}
 
 //handle http requests
 app.post('/upload', function (req, res) {
