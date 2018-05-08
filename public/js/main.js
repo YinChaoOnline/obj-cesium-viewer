@@ -120,14 +120,14 @@ $('#btnUploadObj').click(() => {
 
     const files = $('#inputFileObjModel').get(0).files;
     if (files.length == 0) {
-        alert('please choose a obj file!')
+        alert('No file, please choose an obj file!')
         return;
     }
 
     // if not obj file, reset input:file button and alert
     if (!files[0].name.endsWith('.obj')) {
         $('#inputFileObjModel').replaceWith($('#inputFileObjModel').val('').clone(true));
-        alert('please upload an obj file!')
+        alert('please upload an OBJ format file!')
         return;
     }
 
@@ -167,6 +167,30 @@ $('#btnUploadObj').click(() => {
         });
     }
 });
+
+$('#inputFileObjModel').on("change",()=>{
+
+    //hide divDownloadGltf
+    if (!$("#divDownloadGltf").hasClass('hidden')) {
+        $("#divDownloadGltf").addClass('hidden');
+    }
+
+    const files = $('#inputFileObjModel').get(0).files;
+    if (files.length == 0) {
+
+        alert('No file, please choose an obj file!')
+        return;
+    }
+
+    // if not obj file, reset input:file button and alert
+    if (!files[0].name.endsWith('.obj')) {
+
+        $('#inputFileObjModel').replaceWith($('#inputFileObjModel').val('').clone(true));
+        alert('please upload an OBJ format file!')
+        return;
+    }
+});
+
 
 function setModelDefaultParams(
     longitude = 114.178483,
