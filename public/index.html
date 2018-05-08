@@ -54,23 +54,24 @@
                     <div class="form-group">
                         <label for="inputLocation" class="col-sm-2 control-label">Location:</label>
                         <div class="col-sm-offset-1 col-sm-8">
-                            <input type="text" class="form-control" id="inputLongitude" placeholder="longitude eg: 112.23456">
-                            <input type="text" class="form-control" id="inputLatitude" placeholder="latitude eg: 23.234567">
-                            <input type="text" class="form-control" id="inputHeight" placeholder="height eg: 15.2">
+                            <input type="number" class="form-control" id="inputLongitude" placeholder="longitude eg: 112.23456" min="-180" max="180">
+                            <input type="number" class="form-control" id="inputLatitude" placeholder="latitude eg: 23.234567" min="-90" max="90">
+                            <input type="number" class="form-control" id="inputHeight" placeholder="height eg: 15.2">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputOrientation" class="col-sm-2 control-label">Orientation:</label>
                         <div class="col-sm-offset-1 col-sm-8">
-                            <input type="text" class="form-control" id="inputHeading" placeholder="heading (degree)">
-                            <input type="text" class="form-control" id="inputPitch" placeholder="pitch (degree)">
-                            <input type="text" class="form-control" id="inputRoll" placeholder="roll (degree)">
+                            <input type="number" class="form-control" id="inputHeading" placeholder="heading (degree)">
+                            <input type="number" class="form-control" id="inputPitch" placeholder="pitch (degree)">
+                            <input type="number" class="form-control" id="inputRoll" placeholder="roll (degree)">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputScale" class="col-sm-2 control-label">Scale:</label>
                         <div class="col-sm-offset-1 col-sm-6">
-                            <input type="text" class="form-control" id="inputScale" placeholder="model scale eg: 1.0" value="1.0">
+                            <input type="number" class="form-control" id="inputScale" placeholder="model scale eg: 1.0" value="1.0" min="0.000000001"
+                                max="9999999">
                         </div>
                     </div>
                     <input id="btnShowModel" class="btn btn-default" type="button" value="Show Model">

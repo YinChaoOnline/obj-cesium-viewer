@@ -168,7 +168,7 @@ $('#btnUploadObj').click(() => {
     }
 });
 
-$('#inputFileObjModel').on("change",()=>{
+$('#inputFileObjModel').on("change", () => {
 
     //hide divDownloadGltf
     if (!$("#divDownloadGltf").hasClass('hidden')) {
@@ -243,8 +243,29 @@ $("#btnShowModel").click(() => {
 
     //FIXME: WHEN UPLOADING AND CONVERTING A NEW OBJ FILE, browser seems read the previou result.gltf from browser cache.
     //Therefore, the app can only view the first obj converted gltf.
-    addModelByHeadingPitchRollMatrix(longitude, latitude, height, heading, pitch, roll, scale);
+    if (validateParams(longitude, latitude, height, heading, pitch, roll, scale)) {
+        addModelByHeadingPitchRollMatrix(longitude, latitude, height, heading, pitch, roll, scale);
+    }else{
+        alert('Please ensure the obj location and scale parameters are correct.')
+    }
 })
+
+function validateParams(lon, lat, height, heading, pitch, roll, scale) {
+
+    if (lon > 180 || lon < -180) {
+        return false;
+    }
+
+    if (lat > 90 || lat < -90) {
+        return false;
+    }
+
+    if (scale <= 0) {
+        return false;
+    }
+
+    return true;
+}
 
 function addModelByHeadingPitchRollMatrix(lon, lat, height, heading = 0, pitch = 0, roll = 0, scale = 1) {
 
@@ -273,4 +294,15 @@ function addModelByHeadingPitchRollMatrix(lon, lat, height, heading = 0, pitch =
         // debugShowBoundingVolume: false, // default
         // debugWireframe: false
     }));
+}
+
+//control input:text when keyboard is triggered.
+//onkeypress="return isNumber(event)"
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if ((charCode > 31 && charCode < 48) || charCode > 57) {
+        return false;
+    }
+    return true;
 }
