@@ -240,6 +240,9 @@ $("#btnShowModel").click(() => {
 
     //model scale
     let scale = $('#inputScale').val() ? $('#inputScale').val() : 1;
+
+    //FIXME: WHEN UPLOADING AND CONVERTING A NEW OBJ FILE, browser seems read the previou result.gltf from browser cache.
+    //Therefore, the app can only view the first obj converted gltf.
     addModelByHeadingPitchRollMatrix(longitude, latitude, height, heading, pitch, roll, scale);
 })
 
