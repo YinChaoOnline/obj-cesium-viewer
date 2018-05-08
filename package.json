@@ -31,6 +31,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "formidable": "^1.2.1",
+    "moment": "^2.22.1",
     "morgan": "^1.9.0",
     "obj2gltf": "^2.2.0"
   },

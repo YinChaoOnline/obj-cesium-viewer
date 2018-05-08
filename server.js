@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const formidable = require('formidable');
 const obj2gltf = require('obj2gltf');
+const moment = require('moment');
 
 const app = express();
 
@@ -42,7 +43,8 @@ const server = app.listen(port, function () {
 //handle http requests
 app.post('/upload', function (req, res) {
 
-    console.log('start post upload.')
+    let currentTime = moment().format('DD/MM/YYYY HH:mm:ss');
+    console.log(`start post upload, ${currentTime}`)
 
     // create an incoming form object
     let form = new formidable.IncomingForm();
@@ -76,17 +78,18 @@ app.post('/upload', function (req, res) {
 
         //send a success
         res.end('success');
-
-        console.log('start convert obj to gltf.')
+        currentTime = moment().format('DD/MM/YYYY HH:mm:ss');
+        console.log(`start converting obj to gltf, ${currentTime}`)
         //start converting obj to gltf
         obj2gltf(path.join(form.uploadDir, fileName), {
             materialsCommon: true,
             secure: true,
             checkTransparency: true
         }).then(function (gltf) {
+            currentTime = moment().format('DD/MM/YYYY HH:mm:ss');
             const data = Buffer.from(JSON.stringify(gltf));
-            fs.writeFileSync(path.join(form.uploadDir,'result.gltf'), data);
-            console.log("gltf generated done!")
+            fs.writeFileSync(path.join(form.uploadDir, 'result.gltf'), data);
+            console.log(`gltf generated done! ${currentTime}`)
         }).catch(function (err) {
             console.log('gltf generated failed for: ' + err);
         });
@@ -100,7 +103,7 @@ app.post('/upload', function (req, res) {
     });
 });
 
-app.get('/gltf',(req,res)=>{
+app.get('/gltf', (req, res) => {
     res.download(path.join('public/uploads', 'result.gltf'));
 })
 
