@@ -1,9 +1,9 @@
 # obj-cesium-viewer
-view obj model correctly in cesium
+view [OBJ](https://en.wikipedia.org/wiki/Wavefront_.obj_file) models correctly in [Cesium.js](https://cesiumjs.org/)
 
 # Requirements
-node 8.0 plus
-git
+- node 8.0+
+- git
 
 # Install
 1.install the repo
@@ -34,7 +34,7 @@ $ node server
   ![](doc/img/Pitch-roll-and-yaw-of-the-tag.png)
 
 # project snapshots
-1.project ui
+1.project UI
 
 ![](doc/img/main1.jpg)
 
@@ -45,3 +45,7 @@ $ node server
 3.tab2
 
 ![](doc/img/main3.jpg)
+
+4. help dialog
+
+![](doc/img/main4.jpg)
