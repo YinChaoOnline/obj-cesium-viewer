@@ -273,7 +273,12 @@ function addModelByHeadingPitchRollMatrix(lon, lat, height, heading = 0, pitch =
     let center = Cesium.Cartesian3.fromDegrees(lon, lat, height);
 
     //by controling heading,pitch and roll ,we can rotate the model around x,y,z axis
-    let hpv = new Cesium.HeadingPitchRoll(heading * Cesium.Math.PI / 180, pitch * Cesium.Math.PI / 180, roll * Cesium.Math.PI / 180);
+    //https://cesiumjs.org/Cesium/Build/Documentation/HeadingPitchRoll.html,from this page we know
+    //Heading is the rotation about the negative z axis.Pitch is the rotation about the negative y axis.Roll is the rotation about the positive x axis
+    //HACK: It turns out the rotation directions are not all aligned with the model direction when we take the cesium reference frame as the basis.
+    //I found roll(x direction) is the same while pitch(y direction) and heading/yaw(z direction) are just opposite.
+    //for generating hpv value , i have included heading and pitch with a minus. so be careful of the hack.
+    let hpv = new Cesium.HeadingPitchRoll(-heading * Cesium.Math.PI / 180, -pitch * Cesium.Math.PI / 180, roll * Cesium.Math.PI / 180);
 
     let modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(
         center,
