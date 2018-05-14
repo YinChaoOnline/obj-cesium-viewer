@@ -36,8 +36,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-10">
-                            <a id="btnUploadObj" class="btn btn-default">Upload Obj</a>
+                        <div class="col-sm-4">
+                            <a id="btnUploadObj" class="btn btn-primary">Upload Obj</a>
                         </div>
                     </div>
                 </form>
@@ -50,33 +50,43 @@
             </div>
             <div id="show" class="tab-pane fade">
                 <form class="form-yc form-horizontal">
-                    <h4 class="text-success">Click on globe to pick the model position.</h4>
                     <div class="form-group">
                         <label for="inputLocation" class="col-sm-2 control-label">Location:</label>
-                        <div class="col-sm-offset-1 col-sm-8">
-                            <input type="number" class="form-control" id="inputLongitude" placeholder="longitude eg: 112.23456" min="-180" max="180">
-                            <input type="number" class="form-control" id="inputLatitude" placeholder="latitude eg: 23.234567" min="-90" max="90">
-                            <input type="number" class="form-control" id="inputHeight" placeholder="height eg: 15.2">
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="inputLongitude" step=any placeholder="longitude eg: 112.2300" min="-180" max="180">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="inputLatitude" step=any placeholder="latitude eg: 23.2300" min="-90" max="90">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="inputHeight" step=any placeholder="height eg: 15.2">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputOrientation" class="col-sm-2 control-label">Orientation:</label>
-                        <div class="col-sm-offset-1 col-sm-8">
-                            <input type="number" class="form-control" id="inputHeading" placeholder="heading (degree)">
-                            <input type="number" class="form-control" id="inputPitch" placeholder="pitch (degree)">
-                            <input type="number" class="form-control" id="inputRoll" placeholder="roll (degree)">
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="inputRoll" step=any placeholder="x rotation">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="inputPitch" step=any placeholder="y rotation">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="inputHeading" step=any placeholder="z rotation">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputScale" class="col-sm-2 control-label">Scale:</label>
-                        <div class="col-sm-offset-1 col-sm-6">
-                            <input type="number" class="form-control" id="inputScale" placeholder="model scale eg: 1.0" value="1.0" min="0.000000001"
-                                max="9999999">
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" id="inputScale" step=any placeholder="model scale eg: 1.0" value="1.0" min="0.000000001" max="9999999">
                         </div>
                     </div>
-                    <input id="btnShowModel" class="btn btn-default" type="button" value="Show Model">
+                    <input id="btnShowModel" class="btn btn-default btn-primary center-block" type="button" value="Show Model">
                 </form>
-                <img src="img/HPR.png" alt="sketch of head pitch roll" class="img-thumbnail center-block">
+
+                <!-- Button trigger modal -->
+                <a type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+                    <span class="glyphicon glyphicon-thumbs-up"></span> About Parameters
+                </a>
             </div>
         </div>
     </div>
@@ -100,6 +110,83 @@
             </li>
         </ul>
     </div>
+
+
+    <!-- Modal -->
+    <!-- should be placed here, otherwise it may cause modal dlg could not be closed correctly.   -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Help</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>
+                        1.set model location(longitude, latitude, height). Tip: You can click on globe to pick a position.
+                    </h4>
+                    <h4>
+                        2.set model orientation around x, y, z(use the <mark> north-east-up reference frame</mark>).
+                        <!-- <img src="img/HPR.png" alt="sketch of head pitch roll" class="img-thumbnail center-block">-->
+                    </h4>
+                    <h4>
+                        3.set the model scale, eg: 1.0;
+                    </h4>
+                    <!-- <h4 class="bg-primary">Parameters Table</h4>-->
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Longitude</th>
+                                <th>Latitude</th>
+                                <th>Height</th>
+                                <th>X Rotation</th>
+                                <th>Y Rotation</th>
+                                <th>Z Rotation</th>
+                                <th>Scale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Instruction</th>
+                                <td>use degree, range -180~180</td>
+                                <td>use degree, range -90~90</td>
+                                <td>float</td>
+                                <td>use degree, around x axis,anti-clockwise</td>
+                                <td>use degree, around y axis,anti-clockwise</td>
+                                <td>use degree, around z axis,anti-clockwise</td>
+                                <td>float</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Default Value</th>
+                                <td>114.178483</td>
+                                <td>22.302250</td>
+                                <td>13</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1.0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Example</th>
+                                <td>112.2300</td>
+                                <td>23.2300</td>
+                                <td>15.2</td>
+                                <td>90, rotate around x 90 degree</td>
+                                <td>-90, rotate around y 90 degree with clockwise</td>
+                                <td>90, rotate around z 90 degree</td>
+                                <td>1.5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
